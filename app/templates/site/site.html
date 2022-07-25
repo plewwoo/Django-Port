@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+	{% for d in data %}
+	<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 p-3">
+		<div class="card card-size">
+			<a href="{% url 'viewSite' d.siteCategory d.id %}"><img src="{{ d.thumbnail.url }}" class="card-img-top thumbnail-img" alt="{{ d.siteName }}"></a>
+			<div class="card-body">
+				<div class="card-desc d-flex justify-content-between align-items-center">
+					<a class="card-link" href="{% url 'viewSite' d.siteCategory d.id %}"><h5 class="card-title">{{ d.siteName }}</h5></a>
+					{% if d.siteCategory == 'website' %}
+					<div class="icon-link">
+						{% if d.github %}
+						<a href="{{ d.github }}"><i class="fa-brands fa-github"></i></a>
+						{% endif %}
+						{% if d.externalLink %}
+						<a href="{{ d.externalLink }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+						{% endif %}
+					</div>
+					{% endif %}
+				</div>
+				<p class="card-text">{{ d.siteDesc }}</p>
+			</div>
+			<div class="card-footer d-flex align-items-center text-muted">
+				<div class="px-2">
+					Update : {{ d.updateDate | date:"M d, y" }}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+
+{% endblock content %}

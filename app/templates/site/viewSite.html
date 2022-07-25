@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>Work : {{ site.siteName }}</p> 
+<p>Description : {{ site.siteDesc }}</p>
+
+
+<div class="work-img-container">
+	{% for i in image %}
+	<img class="work-img" src="{{ i.image.url }}" style="height: 280;">
+	{% endfor %}
+</div>
+
+
+{% endblock content %}

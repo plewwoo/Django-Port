@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Plew</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@100;200;300;400;500;600;700;800;900;&display=swap"
+		rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400;500;600;700&display=swap" rel="stylesheet">
+	{% load static %}
+	<link rel="stylesheet" href="{% static "css/index.css" %}">
+</head>
+
+<body>
+	<nav class="navbar bg-light">
+		<div class="container-fluid">
+			<a href="{% url 'home' %}" class="navbar-brand">Plew</a>
+			<form class="d-flex">
+				<a href="{% url 'site' 'website' %}" class="navbar-brand">Website</a>
+				<a href="{% url 'site' 'graphic' %}" class="navbar-brand">Graphic</a>
+				<a href="{% url 'site' 'photography' %}" class="navbar-brand">Photography</a>
+				<a href="{% url 'resume' %}" class="navbar-brand">Resume</a>
+				<a href="{% url 'add' %}" class="navbar-brand"><i class="fa-solid fa-circle-plus"></i></a>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container mt-5">
+		{% block content %}
+		{% endblock content %}
+	</div>
+
+	<div class="footer">
+		<ul class="contact-list">
+			<li><i class="fa-solid fa-phone"></i> : <a href="tel:0980179656">0980179656</a></li>
+			<li><i class="fa-solid fa-envelope"></i> : <a href="mailto:pew_woothiphom@hotmail.com" target="_blank">pew_woothiphom@hotmail.com</a></li>
+			<li><i class="fa-brands fa-line"></i> : <a href="https://line.me/ti/p/YmX-ms6KZt" target="_blank">plew1531</a></li>
+			<li><i class="fa-brands fa-facebook"></i> : <a href="https://www.facebook.com/plewwoo/" target="_blank">Plew Woo</a></li>
+			<li><i class="fa-brands fa-instagram-square"> : <a href="https://www.instagram.com/plewwoo/" target="_blank">plewwoo</a></i></li>
+		</ul>
+	</div>
+</body>
+
+</html>

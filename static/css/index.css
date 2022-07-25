@@ -1,0 +1,37 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+.full-height {
+	min-height: 100vh;
+}
+
+.menu {
+	margin-right: 150px;
+	list-style: none;
+}
+
+.menu p {
+	font-size: 50px;
+}
+
+.menu a {
+	color: black;
+	text-decoration: none;
+}
+
+.menu a:hover {
+	color: black;
+	text-decoration: underline;
+}
+
+img {
+	width: 750px;
+	border-radius: 1000px;
+}
