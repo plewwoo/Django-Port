@@ -54,9 +54,10 @@ def add(request):
 		newWork.externalLink = externalLink
 		newWork.siteCategory = category
 		newWork.thumbnail = thumbnail
-		x = youtube.split('=')
-		y = x[1].split('&')
-		newWork.youtube = y[0]
+		if youtube:
+			x = youtube.split('=')
+			y = x[1].split('&')
+			newWork.youtube = y[0]
 		newWork.save()
 
 		for image in images:
