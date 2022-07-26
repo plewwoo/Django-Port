@@ -16,6 +16,13 @@ from pathlib import Path
 import dj_database_url
 import django_heroku
 
+from pathlib import Path
+from environs import Env
+
+# Setup env
+env = Env()
+env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,10 +31,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = environ.get('SECRET_KEY')
+ON_HEROKU = os.environ.get('ON_HEROKU')
+
+if ON_HEROKU:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+else:
+    SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -78,14 +91,20 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default' : dj_database_url.config(conn_max_age=600, ssl_require=True)
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-}
+# DATABASES = {
+#     'default' : dj_database_url.config(conn_max_age=600, ssl_require=True)
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': BASE_DIR / 'db.sqlite3',
+#     # }
+# }
 
+if ON_HEROKU:
+    DATABASE_URL = 'postgres://ygdhinyxqiqxqq:c279451cb545c1720d9d88873c34ce6ae194b620441c995bdacb938f07f3f428@ec2-54-225-234-165.compute-1.amazonaws.com:5432/d8nhca3mdccs83'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -131,5 +150,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+ON_CLOUDINARY = os.environ.get('ON_CLOUDINARY')
+
+if ON_CLOUDINARY:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+        'API_KEY': os.environ.get('API_KEY'),
+        'API_SECRET': os.environ.get('API_SECRET')
+    }
+else:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': env.str('CLOUD_NAME'),
+        'API_KEY': env.str('API_KEY'),
+        'API_SECRET': env.str('API_SECRET')
+    }
 
 django_heroku.settings(locals())

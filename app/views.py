@@ -6,25 +6,8 @@ from .models import *
 # Create your views here.
 
 def index(request):
-	website = Work.objects.filter(siteCategory = 'website')
-	paginator = Paginator(website, 3)
-	websiteData = paginator.get_page(paginator)
 
-	graphic = Work.objects.filter(siteCategory = 'graphic')
-	paginator = Paginator(graphic, 3)
-	graphicData = paginator.get_page(paginator)
-
-	photograph = Work.objects.filter(siteCategory = 'photography')
-	paginator = Paginator(photograph, 3)
-	photographData = paginator.get_page(paginator)
-
-	context = {
-		'websiteData' : websiteData,
-		'graphicData' : graphicData,
-		'photographData' : photographData,
-	}
-
-	return render(request, 'index.html', context)
+	return render(request, 'index.html')
 
 def site(request, site):
 	data = Work.objects.filter(siteCategory = site)
@@ -36,11 +19,11 @@ def site(request, site):
 	return render(request, 'site/site.html', context)
 
 def viewSite(request, site, id):
-	site = Work.objects.get(id=id)
+	work = Work.objects.get(id=id)
 	image = Image.objects.filter(site = id)
 
 	context = {
-		'site' : site,
+		'work' : work,
 		'image' : image,
 	}
 
@@ -57,16 +40,20 @@ def add(request):
 		data = request.POST.copy()
 		name = data.get('name')
 		category = data.get('category')
-		thumbnail = request.FILES['thumbnail']
 		description = data.get('description')
+		github = data.get('github')
+		externalLink = data.get('externalLink')
+		thumbnail = request.FILES['thumbnail']
 		images = request.FILES.getlist('images')
 		
-		newSite = Work()
-		newSite.siteName = name
-		newSite.siteDesc = description
-		newSite.siteCategory = category
-		newSite.thumbnail = thumbnail
-		newSite.save()
+		newWork = Work()
+		newWork.siteName = name
+		newWork.siteDesc = description
+		newWork.github = github
+		newWork.externalLink = externalLink
+		newWork.siteCategory = category
+		newWork.thumbnail = thumbnail
+		newWork.save()
 
 		for image in images:
 			newImg = Image()

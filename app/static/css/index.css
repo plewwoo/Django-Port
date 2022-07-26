@@ -57,6 +57,13 @@ html, body {
 	margin-right: 0;
 }
 
+.card-truncate {
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .card-size {
 	height: 100%;
 	margin-right: 0;

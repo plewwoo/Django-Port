@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="form-group m-3">
-					<label class="form-label">Site category</label>
+					<label class="form-label">Category</label>
 					<select class="form-select" name="category" required>
 						<option selected disabled value=''></option>
 						<option value='website'>Website</option>
@@ -32,12 +32,21 @@
 				</div>
 
 				<div class="form-group m-3">
-					<label>Site description</label>
+					<label>GitHub</label>
+					<input required name="github" type="text" class="form-control">
+				</div>
+
+				<div class="form-group m-3">
+					<label>External link</label>
+					<input required name="externalLink" type="text" class="form-control">
+				</div>
+
+				<div class="form-group m-3">
+					<label>Description</label>
 					<textarea name="description" class="form-control" cols="30" rows="5"></textarea>
 				</div>
 				
-				<div class="d-flex justify-content-between my-3">
-					<a href="" class="btn btn-dark m-3">Go Back</a>
+				<div class="d-flex justify-content-end my-3">
 					<button type='submit' class="btn btn-primary m-3">Submit</button>
 				</div>
 
