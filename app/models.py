@@ -12,6 +12,7 @@ class Work (models.Model):
 	thumbnail = models.ImageField(upload_to='website_thumbnail/')
 	externalLink = models.CharField(max_length=100, null=True, blank=True)
 	github = models.CharField(max_length=100, null=True, blank=True)
+	youtube = models.CharField(max_length=100, null=True, blank=True)
 	createDate = models.DateTimeField(auto_now_add=True)
 	updateDate = models.DateTimeField(auto_now=True)
 

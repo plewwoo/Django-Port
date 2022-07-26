@@ -43,6 +43,7 @@ def add(request):
 		description = data.get('description')
 		github = data.get('github')
 		externalLink = data.get('externalLink')
+		youtube = data.get('youtube')
 		thumbnail = request.FILES['thumbnail']
 		images = request.FILES.getlist('images')
 		
@@ -53,6 +54,9 @@ def add(request):
 		newWork.externalLink = externalLink
 		newWork.siteCategory = category
 		newWork.thumbnail = thumbnail
+		x = youtube.split('=')
+		y = x[1].split('&')
+		newWork.youtube = y[0]
 		newWork.save()
 
 		for image in images:
