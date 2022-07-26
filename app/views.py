@@ -1,6 +1,5 @@
-import imp
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 from .models import *
 
 # Create your views here.
@@ -9,8 +8,8 @@ def index(request):
 
 	return render(request, 'index.html')
 
-def site(request, site):
-	data = Work.objects.filter(siteCategory = site)
+def work(request, work):
+	data = Work.objects.filter(siteCategory = work).order_by('id')
 
 	context = {
 		'data' : data,
@@ -18,7 +17,7 @@ def site(request, site):
 
 	return render(request, 'site/site.html', context)
 
-def viewSite(request, site, id):
+def viewWork(request, work, id):
 	work = Work.objects.get(id=id)
 	image = Image.objects.filter(site = id)
 
@@ -32,6 +31,7 @@ def viewSite(request, site, id):
 def resume(request):
 	return render(request, 'resume/resume.html')
 
+@login_required(login_url="/login")
 def add(request):
 
 	categories = Work.objects.all()

@@ -29,14 +29,27 @@
 
 <body>
 	<nav class="navbar bg-light">
-		<div class="container-fluid">
+		<div class="container">
 			<a href="{% url 'home' %}" class="navbar-brand">Plew</a>
 			<form class="d-flex">
-				<a href="{% url 'site' 'website' %}" class="navbar-brand">Website</a>
-				<a href="{% url 'site' 'graphic' %}" class="navbar-brand">Graphic</a>
-				<a href="{% url 'site' 'photography' %}" class="navbar-brand">Photography</a>
+				<a href="{% url 'work' 'website' %}" class="navbar-brand">Website</a>
+				<a href="{% url 'work' 'graphic' %}" class="navbar-brand">Graphic</a>
+				<a href="{% url 'work' 'photography' %}" class="navbar-brand">Photography</a>
 				<a href="{% url 'resume' %}" class="navbar-brand">Resume</a>
-				<a href="{% url 'add' %}" class="navbar-brand"><i class="fa-solid fa-circle-plus"></i></a>
+				{% if user.is_authenticated %}
+				<div class="dropdown">
+					<button class="profile-btn btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						{{ user.first_name }}
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" style="width: 100%;" href="{% url 'add' %}">Add work</a></li>
+						<div class="dropdown-divider"></div>
+						<li><a class="dropdown-item" style="width: 100%;" href="{% url 'logout' %}">Logout</a></li>
+					</ul>
+				</div>
+				{% else %}
+				<a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+				{% endif %}
 			</form>
 		</div>
 	</nav>
@@ -45,6 +58,8 @@
 		{% block content %}
 		{% endblock content %}
 	</div>
+
+	{% include 'auth/login.html' %}
 
 	<div class="footer">
 		<ul class="contact-list">

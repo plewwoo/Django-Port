@@ -11,6 +11,10 @@ html, body {
 	height: 100%;
 }
 
+.side-label {
+	width: 45px;
+}
+
 .full-height {
 	min-height: 100vh;
 }
